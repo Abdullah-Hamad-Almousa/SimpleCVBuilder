@@ -39,3 +39,15 @@
 ### Take the output
 
 ![Alt text](images/Output.png)
+
+Take the output and create the text file
+
+place the output in text file
+
+change the format of the file from txt to html
+
+then open your website on browser recommended (Firefox)
+
+click ctrl + P
+
+make sure Destination is Microsoft print to pdf and paper size is letter
