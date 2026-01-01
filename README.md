@@ -27,3 +27,11 @@
 ### The result
 
 ![Alt text](images/DoneListSection.png)
+
+### Catagory Section
+
+![Alt text](images/CreatorCatagory.png)
+
+### The result
+
+![Alt text](images/DoneCatagory.png)
