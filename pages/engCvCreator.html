@@ -240,12 +240,12 @@
 
     <div class="config-section">
         <div class="config-header">
-            <h3>Header Configuration</h3>
-            <button class="toggle-btn active" id="addHeaderBtn" onclick="addHeaderItem()">+ Add Nav Item</button>
+            <h3>Header Section</h3>
+            <button class="toggle-btn active" id="addHeaderBtn" onclick="addHeaderItem()">+ Add Items max is 8</button>
         </div>
         <div class="form-group">
-            <label>Huge Header Text:</label>
-            <input type="text" id="headerHugeText" placeholder="Main Website Title">
+            <label>Header Text:</label>
+            <input type="text" id="headerHugeText" placeholder="(Your Name Here)">
         </div>
         <div id="headerItemsContainer" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;"></div>
     </div>
@@ -255,13 +255,13 @@
 
     <div class="tag-field-card">
         <div class="config-header">
-            <h3>Tag Section Configuration</h3>
+            <h3>Tag Section:</h3>
             <button class="toggle-btn active" onclick="addTagCategory()" style="background:#e67e22;">+ Add Tag
                 Category</button>
         </div>
         <div class="form-group">
-            <label>Tag Section Main Header (Large):</label>
-            <input type="text" id="tagSectionHeader" placeholder="Section Title">
+            <label>Tag Group Title:</label>
+            <input type="text" id="tagSectionHeader" placeholder="This is the name of the whole tag section.">
         </div>
         <div id="tagCategoriesContainer"></div>
     </div>
@@ -291,9 +291,9 @@
             itemDiv.className = 'dynamic-item'; itemDiv.id = `h_item_${headerItemCount}`;
             itemDiv.innerHTML = `
                 <button class="remove-btn" onclick="removeElement('h_item_${headerItemCount}'); headerItemCount--; updateHeaderBtn();">×</button>
-                <input type="text" class="h-text" placeholder="Label">
-                <select class="h-type" style="margin:0.5rem 0;"><option value="link">Link</option><option value="text">Text</option><option value="phone">Phone</option><option value="email">Email</option></select>
-                <input type="text" class="h-value" placeholder="Value">
+                <input type="text" class="h-text" placeholder="Display Text">
+                <select class="h-type" style="margin:0.5rem 0;"><option class="h-type" style="margin:0.5rem 0;" value="" disabled selected>Select a type</option><option value="link">Link</option><option value="text">Text</option><option value="phone">Phone</option><option value="email">Email</option></select>
+                <input type="text" class="h-value" placeholder="Source Value (URL/Email/Phone...)">
             `;
             container.appendChild(itemDiv); updateHeaderBtn();
         }
@@ -306,16 +306,16 @@
             const sectionDiv = document.createElement('div'); sectionDiv.className = 'main-field'; sectionDiv.id = `body_sec_${bodySectionCount}`;
             sectionDiv.innerHTML = `
                 <button class="remove-btn" onclick="removeElement('body_sec_${bodySectionCount}')">×</button>
-                <h3>Main Section ${bodySectionCount}</h3>
-                <div class="form-group"><label>Top Title:</label>
-                    <div class="flex-row"><input type="text" class="field-top"><button class="toggle-btn active" onclick="toggleSize(this)">Large</button><input type="hidden" class="field-size" value="large"></div>
+                <h3>Main Section</h3>
+                <div class="form-group"><label>Section title:</label>
+                    <div class="flex-row"><input type="text" class="field-top" placeholder="Test"><button class="toggle-btn active" onclick="toggleSize(this)">Large</button><input type="hidden" class="field-size" value="large"></div>
                 </div>
-                <div class="form-group"><label>Middle Text & Info (Italic/Opposite):</label>
+                <div class="form-group"><label>Description & Note (Italic/Opposite):</label>
                     <div class="flex-row"><input type="text" class="field-mid" placeholder="Content text"><input type="text" class="field-info" placeholder="Info Note"></div>
                 </div>
-                <div class="form-group"><label>Bottom Note Items (Circle List):</label>
+                <div class="form-group"><label>Bullet Points</label>
                     <div id="small_items_${bodySectionCount}"></div>
-                    <button class="toggle-btn active" onclick="addSmallItem('small_items_${bodySectionCount}')" style="background:#28a745; margin-top:0.5rem;">+ Add Small Item</button>
+                    <button class="toggle-btn active" onclick="addSmallItem('small_items_${bodySectionCount}')" style="background:#28a745; margin-top:0.5rem;">+ Add Item</button>
                 </div>
             `;
             container.appendChild(sectionDiv);
@@ -327,9 +327,9 @@
             const div = document.createElement('div'); div.className = 'list-field-card'; div.id = `list_sec_${listSectionCount}`;
             div.innerHTML = `
                 <button class="remove-btn" onclick="removeElement('list_sec_${listSectionCount}')">×</button>
-                <h3>List Section ${listSectionCount}</h3>
-                <div class="form-group"><label>Large Header:</label><input type="text" class="l-huge"></div>
-                <div class="form-group"><label>Medium Header & Info:</label><div class="flex-row"><input type="text" class="l-med"><input type="text" class="l-info"></div></div>
+                <h3>List Section</h3>
+                <div class="form-group"><label>Section Title:</label><input type="text" class="l-huge" placeholder="This is the main heading for the list section"></div>
+                <div class="form-group"><label>Medium Header & Info:</label><div class="flex-row"><input type="text" class="l-med" placeholder="Description"><input type="text" class="l-info" placeholder="Write additional details here.."></div></div>
                 <div id="list_items_${listSectionCount}"></div>
                 <button class="toggle-btn active" onclick="addListItem('list_items_${listSectionCount}')" style="background:#9b59b6;">+ Add List Item</button>
             `;
@@ -341,7 +341,7 @@
             const group = document.createElement('div'); group.className = 'dynamic-item'; group.id = `li_${rowId}`;
             group.innerHTML = `
                 <button class="remove-btn" onclick="removeElement('li_${rowId}')">×</button>
-                <div class="flex-row"><input type="text" class="li-bold" placeholder="Bold (e.g. Work)"> <input type="text" class="li-norm" placeholder="Normal (e.g. Detail)"></div>
+                <div class="flex-row"><input type="text" class="li-bold" placeholder="Bold (name of certification)"> <input type="text" class="li-norm" placeholder="(e.g. Detail)"></div>
             `;
             list.appendChild(group);
         }
@@ -352,7 +352,7 @@
             const catDiv = document.createElement('div'); catDiv.className = 'dynamic-item'; catDiv.id = `tag_cat_${tagCategoryCount}`;
             catDiv.innerHTML = `
                 <button class="remove-btn" onclick="removeElement('tag_cat_${tagCategoryCount}')">×</button>
-                <div class="form-group"><label>Category Label:</label><input type="text" class="cat-name"></div>
+                <div class="form-group"><label>Category Name:</label><input type="text" class="cat-name" placeholder="Label for a group of related tags."></div>
                 <div class="tag-row" id="tag_list_${tagCategoryCount}"></div>
                 <button class="toggle-btn active" onclick="addTagToCat('tag_list_${tagCategoryCount}')" style="background:#e67e22; margin-top:0.5rem;">+ Add Tag</button>
             `;
@@ -362,7 +362,7 @@
         function addTagToCat(listId) {
             const list = document.getElementById(listId); const tagId = Date.now();
             const group = document.createElement('div'); group.className = 'flex-row'; group.id = `tag_${tagId}`; group.style.marginBottom = "5px";
-            group.innerHTML = `<input type="text" class="tag-val" style="padding:0.4rem;"><button class="toggle-btn active" style="background:#ff4757;" onclick="removeElement('tag_${tagId}')">×</button>`;
+            group.innerHTML = `<input type="text" class="tag-val" style="padding:0.4rem;" placeholder="Add your tage (Skill)"><button class="toggle-btn active" style="background:#ff4757;" onclick="removeElement('tag_${tagId}')">×</button>`;
             list.appendChild(group);
         }
 
