@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+    <style>
+        :root { --primary-color: #0000a0; --secondary-color: #008000; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f0f2f5; padding: 2rem 0; }
+        .main-wrapper { max-width: 1000px; margin: 0 auto; background: #fff; border: 1px solid #ddd; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); overflow: hidden; }
+        .site-header { padding: 4rem 1rem; text-align: center; }
+        .huge-title { font-size: 4.5rem; font-weight: 800; color: var(--primary-color); margin: 0 0 1.5rem 0; letter-spacing: -2px; }
+        .nav-container { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+        .nav-item { color: #555; text-decoration: none; font-weight: 600; }
+        .header-sep { border: 0; border-top: 2px solid var(--secondary-color); margin: 0; }
+        .container { padding: 4rem 3rem; }
+        .section-box, .tag-section { margin-bottom: 4rem; }
+        .text-huge { font-size: 3.5rem; font-weight: 800; color: var(--primary-color); margin: 0; }
+        .text-medium { font-size: 2.2rem; font-weight: 700; color: var(--primary-color); margin: 0; }
+        .text-medium-styled { font-size: 1.6rem; color: var(--secondary-color); font-weight: 500; }
+        .info-row { display: flex; justify-content: space-between; align-items: baseline; margin: 0.5rem 0; }
+        .info-text { font-style: italic; color: var(--secondary-color); font-size: 1.2rem; }
+        .small-list { list-style-type: circle; margin-top: 1rem; padding-left: 1.5rem; color: #888; font-style: italic; }
+        .small-list-item { font-size: 0.95rem; margin-bottom: 0.3rem; }
+        .horizontal-sep { width: 100%; height: 2px; background: black; margin: 15px 0 20px 0; }
+        .custom-list-container { margin-top: 1.5rem; }
+        .list-item-row { font-size: 1.1rem; margin-bottom: 0.5rem; color: #444; }
+        .li-bold { font-weight: bold; color: #000; font-size: 1.2rem; }
+        .li-norm { color: #555; }
+        .tag-category-group { margin-top: 2rem; padding: 1.5rem; border: 1px solid #eee; border-radius: 12px; background: #fafafa; }
+        .text-cat-name { font-size: 1.2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.8rem; }
+        .tag-container { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+        .tag-bubble { background: var(--primary-color); color: white; padding: 7px 18px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+        footer { text-align: center; padding: 3rem 0; color: #bbb; border-top: 1px solid #eee; background: #fafafa; }
+        @media print {
+            body { background: white; padding: 0; }
+            .main-wrapper { max-width: 100%; border: none; box-shadow: none; border-radius: 0; overflow: visible; }
+            .container { padding: 2rem; }
+            .nav-item { border-left: none !important; padding-left: 0 !important; margin: 0 10px; }
+            .header-sep { border-top: 1px solid #ccc; }
+            footer { background: white; }
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-wrapper">
+        <header class="site-header"><h1 class="huge-title">test</h1><nav class="nav-container"><a href="mailto:test" class="nav-item" style="">test</a><a href="etst" class="nav-item" style="border-left: 2px solid #008000; padding-left: 1.5rem;">test</a><a href="test" class="nav-item" style="border-left: 2px solid #008000; padding-left: 1.5rem;">test</a><a href="tel:test" class="nav-item" style="border-left: 2px solid #008000; padding-left: 1.5rem;">test</a></nav></header>
+        <hr class="header-sep">
+        <div class="container">
+            <div class="section-box">
+                <div class="text-huge">test</div>
+                <div class="horizontal-sep"></div>
+                <div class="info-row"><div class="text-medium-styled">test</div><div class="info-text">test</div></div>
+                <ul class="small-list"><li class="small-list-item">test</li></ul>
+            </div>
+            <div class="section-box">
+                <div class="text-medium">test</div>
+                <div class="horizontal-sep"></div>
+                <div class="info-row"><div class="text-medium-styled">test</div><div class="info-text">test</div></div>
+                <ul class="small-list"><li class="small-list-item">test</li></ul>
+            </div>
+            <div class="section-box">
+                <div class="text-huge">test</div>
+                <div class="horizontal-sep"></div>
+                <div class="info-row"><div class="text-medium">test</div><div class="info-text">test</div></div>
+                <div class="custom-list-container"><div class="list-item-row"><span class="li-bold">test</span> <span class="li-norm">test</span></div></div>
+            </div>
+        <div class="tag-section">
+            <div class="text-huge">test</div>
+            <div class="horizontal-sep"></div>
+            <div class="tag-category-group"><div class="text-cat-name">test</div><div class="tag-container"><span class="tag-bubble">test</span><span class="tag-bubble">test</span></div></div><div class="tag-category-group"><div class="text-cat-name">test</div><div class="tag-container"><span class="tag-bubble">test</span></div></div>
+        </div></div>
+    </div>
+</body>
+</html>
