@@ -6,4 +6,4 @@
 
 ### Header
 
-![Alt text](images/CreatorHeader)
+![Alt text](images/CreatorHeader.png)
