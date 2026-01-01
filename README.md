@@ -35,3 +35,7 @@
 ### The result
 
 ![Alt text](images/DoneCatagory.png)
+
+### Take the output
+
+![Alt text](images/Output.png)
