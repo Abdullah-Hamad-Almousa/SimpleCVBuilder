@@ -8,6 +8,14 @@
 
 ![Alt text](images/CreatorHeader.png)
 
-### the result
+### The result
 
 ![Alt text](images/DoneHeader.png)
+
+### Main Section
+
+![Alt text](images/CreatorMainSection.png)
+
+### The result
+
+![Alt text](images/DoneMainSection.png)
