@@ -183,6 +183,13 @@
             color: white;
         }
 
+        .pdf-btn {
+            background-color: #e74c3c;
+            color: white;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
         .color-pickers {
             display: flex;
             gap: 2rem;
@@ -275,6 +282,8 @@
     <div class="output-box">
         <h3>Generated Source Code:</h3>
         <textarea id="outputCode" readonly></textarea>
+        <button class="btn-action pdf-btn" id="printPdfBtn" onclick="printAsPDF()">Print as PDF (Microsoft Print to
+            PDF)</button>
     </div>
 
     <footer>
@@ -501,6 +510,22 @@
 </body>
 </html>`;
             document.getElementById('outputCode').value = htmlContent;
+        }
+
+        function printAsPDF() {
+            const code = document.getElementById('outputCode').value;
+            if (!code) {
+                alert("Please generate the code first!");
+                return;
+            }
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(code);
+            printWindow.document.close();
+            printWindow.focus();
+            setTimeout(() => {
+                printWindow.print();
+                // printWindow.close(); // Optional: close window after printing
+            }, 500);
         }
 
         addHeaderItem(); addHeaderItem(); addBodySection(); addListSection(); addTagCategory();
