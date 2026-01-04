@@ -5,43 +5,77 @@
   <title>Main menu</title>
   <style>
     body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #f5f5f5;
-      font-family: Arial, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+  font-family: Arial, sans-serif;
+}
+
+/* Center content */
+.main-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-container {
+  display: flex;
+  gap: 20px;
+}
+
+.btn {
+  padding: 15px 40px;
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  background-color: #4169e1;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn:hover {
+  background-color: #3153b5;
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+.header {
+      margin-top: auto;          
+      width: 100%;
+      background-color: #222;
+      color: #fff;
+      text-align: center;
+      padding: 15px 10px;
+      font-size: 14px;
     }
 
-    .button-container {
-      display: flex;
-      gap: 20px;
-    }
 
-    .btn {
-      padding: 15px 40px;          /* medium–large size */
-      font-size: 18px;
-      border: none;
-      border-radius: 6px;
-      background-color: #4169e1;   /* royal blue */
-      color: white;
-      cursor: pointer;
-      transition: background-color 0.2s, transform 0.1s;
-    }
-
-    .btn:hover {
-      background-color: #3153b5;
-      transform: translateY(-1px);
-    }
-
-    .btn:active {
-      transform: translateY(1px);
+    .footer {
+      margin-top: auto;          
+      width: 100%;
+      background-color: #222;
+      color: #fff;
+      text-align: center;
+      padding: 15px 10px;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
-  <div class="button-container">
+  <Header class="header">
+    <div>
+      <img src="pages/Images/MM.png" alt="Logo" 
+      style="cursor:pointer; height: 30px; vertical-align: middle; object-fit: cover; border-radius: 12px;"
+      onclick="window.location.href='https://my-resume-kappa-one.vercel.app/'" />
+    </div>
+  </Header>
+  <div class="main-content button-container">
     <button class="btn" onclick="window.location.href='pages/engCvCreator.html'">
       English CV creator
     </button>
@@ -52,5 +86,10 @@
       Coming Soon
     </button>
   </div>
+  <footer class="footer">
+    <p>
+      &copy; 2026 Abdullah Hamad Mohammad Almousa. All rights reserved.
+    </p>
+  </footer>
 </body>
 </html>
