@@ -1,338 +1,495 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Outfit', sans-serif;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+        line-height: 1.6;
+        background: radial-gradient(circle at top left, #1a1a1a, #000);
+        color: #fff;
+        min-height: 100vh;
+    }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Generator - Pro Advanced Ar version</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 1000px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-            line-height: 1.5;
-            background-color: #f0f2f5;
-            color: #333;
-        }
+    h1 {
+        font-weight: 700;
+        letter-spacing: -1px;
+        margin-bottom: 2.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        background: linear-gradient(45deg, #1a73e8, #ff4757);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-        h1 {
-            border-bottom: 3px solid #007bff;
-            padding-bottom: 0.5rem;
-            color: #007bff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .config-section {
+        background: rgba(26, 115, 232, 0.08);
+        /* 60% Blue theme */
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 2rem;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        margin-bottom: 2.5rem;
+        position: relative;
+        overflow: hidden;
+    }
 
-        .config-section {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            margin-bottom: 2rem;
-            border-top: 5px solid #007bff;
-        }
+    .config-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 5px;
+        height: 100%;
+        background: #ff4757;
+        /* 30% Red accent */
+    }
 
-        .config-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 0.5rem;
-        }
+    .config-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 0.5rem;
+    }
 
-        .config-header h3 {
-            margin: 0;
-            color: #444;
-        }
+    .config-header h3 {
+        margin: 0;
+        color: #fff;
+    }
 
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
+    .form-group {
+        margin-bottom: 1.2rem;
+    }
 
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.4rem;
-            font-size: 0.9rem;
-            color: #555;
-        }
+    label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.4rem;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.8);
+    }
 
-        input,
-        select {
-            width: 100%;
-            padding: 0.7rem;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            box-sizing: border-box;
-        }
+    input,
+    select {
+        width: 100%;
+        padding: 0.85rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        color: #fff;
+        font-family: inherit;
+        transition: all 0.3s ease;
+    }
 
-        .dynamic-item {
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-            position: relative;
-            margin-bottom: 1rem;
-        }
+    input:focus,
+    select:focus {
+        outline: none;
+        background: rgba(255, 255, 255, 0.1);
+        border-color: #1a73e8;
+        box-shadow: 0 0 15px rgba(26, 115, 232, 0.3);
+    }
 
-        #sectionsContainer,
-        #listSectionsContainer {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
+    /* Improved placeholder visibility */
+    input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
 
-        .main-field,
-        .list-field-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            position: relative;
-            border-top: 5px solid #28a745;
-        }
+    /* Clear select options on dark theme */
+    select option {
+        background-color: #111;
+        color: #fff;
+    }
 
-        .list-field-card {
-            border-top-color: #9b59b6;
-        }
+    .dynamic-item {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(8px);
+        padding: 1.2rem;
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+        margin-bottom: 1.2rem;
+        transition: all 0.3s ease;
+        overflow: hidden;
+    }
 
-        .tag-field-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            position: relative;
-            border-top: 5px solid #e67e22;
-            border-left: 5px solid black;
-            margin-bottom: 2rem;
-        }
+    .dynamic-item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 4px;
+        height: 100%;
+        background: #1a73e8;
+        /* Blue accent for items */
+    }
 
-        .flex-row {
-            display: flex;
-            gap: 0.5rem;
-        }
+    .dynamic-item:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(26, 115, 232, 0.3);
+    }
 
-        .remove-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #ff4757;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            font-weight: bold;
-        }
+    #sectionsContainer,
+    #listSectionsContainer,
+    #leadershipSectionsContainer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
 
-        .toggle-btn {
-            background-color: #6c757d;
-            color: white;
-            border: none;
-            padding: 0 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
+    .main-field,
+    .list-field-card {
+        background: rgba(26, 115, 232, 0.08);
+        /* 60% Blue */
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 2rem;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        position: relative;
+        transition: transform 0.3s ease;
+    }
 
-        .toggle-btn.active {
-            background-color: #007bff;
-        }
+    .main-field:hover,
+    .list-field-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(26, 115, 232, 0.5);
+    }
 
-        .controls {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            position: sticky;
-            bottom: 1rem;
-            z-index: 100;
-        }
+    .main-field::before,
+    .list-field-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 4px;
+        background: #ff4757;
+        /* 30% Red */
+        border-radius: 20px 20px 0 0;
+    }
 
-        .btn-action {
-            flex: 1;
-            padding: 1.2rem;
-            cursor: pointer;
-            border-radius: 10px;
-            font-weight: 700;
-            border: none;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
+    .list-field-card {
+        border-top-color: #1a73e8;
+        /* 60% Blue */
+    }
 
-        .add-btn {
-            background-color: #28a745;
-            color: white;
-        }
+    .leadership-field-card {
+        background: rgba(26, 115, 232, 0.08);
+        /* 60% Blue */
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 2rem;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        position: relative;
+        margin-bottom: 2rem;
+        transition: transform 0.3s ease;
+    }
 
-        .list-btn {
-            background-color: #9b59b6;
-            color: white;
-        }
+    .leadership-field-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(26, 115, 232, 0.5);
+    }
 
-        .generate-btn {
-            background-color: #007bff;
-            color: white;
-        }
+    .leadership-field-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 4px;
+        background: #ff4757;
+        /* 30% Red */
+        border-radius: 20px 20px 0 0;
+    }
 
-        .pdf-btn {
-            background-color: #e74c3c;
-            color: white;
-            margin-top: 1rem;
-            width: 100%;
-        }
+    .tag-field-card {
+        background: rgba(26, 115, 232, 0.05);
+        backdrop-filter: blur(12px);
+        padding: 2rem;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+        margin-bottom: 2.5rem;
+    }
 
-        .color-pickers {
-            display: flex;
-            gap: 2rem;
-            background: #fff;
-            padding: 1rem 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            align-items: center;
-        }
+    .flex-row {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
 
-        input[type="color"] {
-            width: 40px;
-            height: 40px;
-            border: none;
-            padding: 0;
-            background: none;
-        }
+    .remove-btn {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: #ff4757;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        font-weight: bold;
+    }
 
-        textarea {
-            width: 100%;
-            height: 400px;
-            font-family: monospace;
-            padding: 1.5rem;
-            border: 2px solid #ddd;
-            border-radius: 12px;
-            background: #2d3436;
-            color: #dfe6e9;
+    .toggle-btn {
+        background-color: #757575;
+        /* 10% Gray */
+        color: white;
+        border: 1px solid #fff;
+        padding: 0 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.8rem;
+        font-weight: bold;
+        height: 38px;
+    }
+
+    .toggle-btn.active {
+        background-color: #ff4757;
+        box-shadow: 0 0 15px rgba(255, 71, 87, 0.4);
+    }
+
+    .controls {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        position: sticky;
+        bottom: 1rem;
+        z-index: 100;
+    }
+
+    .btn-action {
+        flex: 1;
+        padding: 1.2rem;
+        cursor: pointer;
+        border-radius: 10px;
+        font-weight: 700;
+        border: none;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .add-btn {
+        background-color: #ff4757;
+        color: white;
+        box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+    }
+
+    .list-btn {
+        background-color: rgba(26, 115, 232, 0.2);
+        color: white;
+        border: 1px solid rgba(26, 115, 232, 0.3);
+        backdrop-filter: blur(12px);
+    }
+
+    .btn-blue {
+        background-color: #ff4757 !important;
+        color: white;
+    }
+
+    .btn-yellow {
+        background-color: #ff4757 !important;
+        color: #fff !important;
+    }
+
+    .desc-box {
+        background: #1a73e8;
+        /* 60% Blue */
+        border: 1px solid #757575;
+        /* 10% Gray */
+        padding: 10px;
+        border-radius: 8px;
+        margin-top: 10px;
+    }
+
+    .desc-row {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 8px;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 5px;
+        border-radius: 6px;
+    }
+
+    .btn-bullet-toggle {
+        min-width: 80px;
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 6px;
+        cursor: pointer;
+        padding: 5px;
+        font-size: 0.75rem;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .btn-bullet-toggle.is-bullet {
+        background: #2ed573;
+        color: white;
+        border-color: #23b561;
+    }
+
+    .btn-bullet-toggle.is-bullet::after {
+        content: " (قائمة)";
+    }
+
+    .btn-bullet-toggle:not(.is-bullet)::after {
+        content: " (نص)";
+    }
+
+    textarea {
+        width: 100%;
+        height: 300px;
+        font-family: monospace;
+        padding: 1rem;
+        border: 2px solid #ddd;
+        border-radius: 12px;
+        background: #2d3436;
+        color: #dfe6e9;
+        margin-top: 1rem;
+        direction: ltr;
+        text-align: left;
+    }
+
+    @media print {
+
+        .config-section,
+        .tag-field-card,
+        .controls,
+        .output-box,
+        div[style*="justify-content: space-between"],
+        footer,
+        .remove-btn,
+        .toggle-btn,
+        h3,
+        .desc-box {
+            display: none !important;
         }
-    </style>
+    }
+</style>
+<script src="https://cdn.jsdelivr.net/gh/evidenceprime/html-docx-js@master/dist/html-docx.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 </head>
 
 <body>
-
     <div
-        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 3px solid #000; padding-bottom: 1rem;">
-        <h1 style="border:none; padding:0; margin:0; color:#000;">مولد CV Pro المتقدم</h1>
+        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 3px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
+        <h1 style="border:none; padding:0; margin:0;">مولد السيرة الذاتية المتطور</h1>
         <div style="display: flex; gap: 1rem; align-items: center;">
             <button class="toggle-btn active" onclick="window.location.href='../index.html'"
-                style="background-color: #333;">
-                ارجع للخلف
-            </button>
-            <img src="Images/MM.png" alt="Logo"
-                style="cursor:pointer; height: 40px; vertical-align: middle; object-fit: cover; border-radius: 8px;"
-                onclick="window.location.href='https://abdullah-hamad-almousa.github.io/MyNewPortfolio/'" />
+                style="background-color: var(--secondary-color, #ff4757);">العودة</button>
+            <img src="Images/MM.png" alt="Logo" style="cursor:pointer; height: 40px; border-radius: 8px;"
+                onclick="window.location.href='https://abdullah-hamad-almousa.github.io/MyNewPortfolio/pages/Linkes/Links.html'" />
         </div>
     </div>
 
-
-
     <div class="config-section">
         <div class="config-header">
-            <h3>قسم العنوان</h3>
-            <button class="toggle-btn active" id="addHeaderBtn" onclick="addHeaderItem()">+ الحد الأقصى لإضافة العناصر
-                هو 8</button>
+            <h3>الاسم وبيانات الاتصال</h3>
+            <button class="toggle-btn active" id="addHeaderBtn" onclick="addHeaderItem()">+ إضافة بند اتصال</button>
         </div>
         <div class="form-group">
-            <label>نص العنوان</label>
-            <input type="text" id="headerHugeText" placeholder="(اسمك هنا)">
+            <label>الاسم الكامل:</label>
+            <input type="text" id="headerHugeText" placeholder="الاسم هنا">
         </div>
         <div id="headerItemsContainer" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;"></div>
     </div>
 
     <div id="sectionsContainer"></div>
     <div id="listSectionsContainer"></div>
+    <div id="leadershipSectionsContainer"></div>
 
     <div class="tag-field-card">
         <div class="config-header">
-            <h3>قسم العلامات</h3>
-            <button class="toggle-btn active" onclick="addTagCategory()" style="background:#e67e22;">+ إضافة فئة
-                العلامة</button>
+            <h3>المهارات والاهتمامات (اختياري):</h3>
+            <button class="toggle-btn active" onclick="addSkillCategory()">+ إضافة فئة</button>
         </div>
         <div class="form-group">
-            <label>عنوان مجموعة العلامات</label>
-            <input type="text" id="tagSectionHeader" placeholder="هذا هو اسم قسم العلامة بالكامل">
+            <label>عنوان القسم:</label>
+            <input type="text" id="skillsSectionHeader" placeholder="المهارات والاهتمامات">
         </div>
-        <div id="tagCategoriesContainer"></div>
+        <div id="skillsCategoriesContainer"></div>
     </div>
 
     <div class="controls">
-        <button class="btn-action add-btn" onclick="addBodySection()">+ إضافة القسم الرئيسي</button>
-        <button class="btn-action list-btn" onclick="addListSection()">+ إضافة قسم القائمة</button>
-        <button class="btn-action generate-btn" onclick="generateCode()">إنشاء كود النهائي</button>
+        <button class="btn-action add-btn" onclick="addBodySection()">+ إضافة التعليم</button>
+        <button class="btn-action list-btn" onclick="addListSection()">+ إضافة الخبرة</button>
+        <button class="btn-action btn-blue" onclick="addLeadershipSection()">+ إضافة القيادة</button>
     </div>
+    <button class="btn-action generate-btn btn-yellow" onclick="generateCode()"
+        style="margin-bottom:2rem; width:100%;">إنشاء الكود النهائي</button>
 
     <div class="output-box">
-        <h3>الرمز المصدري الذي تم إنشاؤه</h3>
+        <h3>الكود المصدري الناتج:</h3>
         <textarea id="outputCode" readonly></textarea>
-        <button class="btn-action pdf-btn" id="printPdfBtn" onclick="printAsPDF()">طباعة كملف PDF (طباعة Microsoft إلى
-            PDF)</button>
+        <button class="btn-action" style="background:#e74c3c; color:white; width:100%; margin-top:1rem;"
+            onclick="printAsPDF()">طباعة كـ PDF</button>
+        <button class="btn-action" style="background:#2ecc71; color:white; width:100%; margin-top:1rem;"
+            onclick="printAsDocx()">طباعة كـ DOCX</button>
     </div>
 
-    <footer>
-        <p> &copy; 2026 Abdullah Hamad Mohammad Almousa. All rights reserved.</p>
-    </footer>
-
     <script>
-        let bodySectionCount = 0; let headerItemCount = 0; let tagCategoryCount = 0; let listSectionCount = 0;
+        let headerItemCount = 0;
+        let bodyCount = 0;
+        let listSectionCount = 0;
+        let skillCatCount = 0;
+
+        window.onload = () => {
+            addBodySection();
+            addLeadershipSection();
+        };
 
         function addHeaderItem() {
-            if (headerItemCount >= 8) return; headerItemCount++;
+            if (headerItemCount >= 8) return;
+            headerItemCount++;
             const container = document.getElementById('headerItemsContainer');
-            const itemDiv = document.createElement('div');
-            itemDiv.className = 'dynamic-item'; itemDiv.id = `h_item_${headerItemCount}`;
-            itemDiv.innerHTML = `
-                <button class="remove-btn" onclick="removeElement('h_item_${headerItemCount}'); headerItemCount--; updateHeaderBtn();">×</button>
-                <select class="h-type" style="margin:0.5rem 0; width: 100%;">
-                    <option value="" disabled selected>اختر نوعًا (Select Type)</option>
-                    <option value="الهاتف">الهاتف (Phone)</option>
-                    <option value="البريد الإلكتروني">البريد الإلكتروني (Email)</option>
-                    <option value="LinkedIn">LinkedIn</option>
-                    <option value="GitHub">GitHub</option>
-                    <option value="Kaggle">Kaggle</option>
-                    <option value="معرض الأعمال">معرض الأعمال (Portfolio)</option>
-                    <option value="الموقع الإلكتروني">الموقع (Website)</option>
-                    <option value="الموقع">العنوان (Location)</option>
+            const id = Date.now();
+            const div = document.createElement('div');
+            div.className = 'dynamic-item';
+            div.id = `h_item_${id}`;
+            div.innerHTML = `
+                <button class="remove-btn" onclick="removeElement('h_item_${id}'); headerItemCount--; updateHeaderBtn();">×</button>
+                <select class="h-type" style="margin-bottom:10px;">
+                    <option value="هاتف">هاتف</option><option value="إيميل">إيميل</option><option value="LinkedIn">LinkedIn</option><option value="GitHub">GitHub</option>
+                    <option value="موقع">موقع</option><option value="عنوان">عنوان</option><option value="مجموعة الأعمال">مجموعة الأعمال</option>
                 </select>
-                <input type="text" class="h-value" placeholder="القيمة (مثل رقم الهاتف، الرابط)">
+                <input type="text" class="h-value" placeholder="القيمة...">
             `;
-            container.appendChild(itemDiv); updateHeaderBtn();
+            container.appendChild(div);
+            updateHeaderBtn();
         }
-
         function updateHeaderBtn() { const btn = document.getElementById('addHeaderBtn'); btn.disabled = headerItemCount >= 8; btn.style.opacity = headerItemCount >= 8 ? "0.5" : "1"; }
 
         function addBodySection() {
-            bodySectionCount++;
+            bodyCount++;
             const container = document.getElementById('sectionsContainer');
-            const sectionDiv = document.createElement('div'); sectionDiv.className = 'main-field'; sectionDiv.id = `body_sec_${bodySectionCount}`;
-            sectionDiv.innerHTML = `
-                <button class="remove-btn" onclick="removeElement('body_sec_${bodySectionCount}')">×</button>
-                <h3>القسم الرئيسي</h3>
-                <div class="form-group"><label>عنوان القسم</label>
-                    <div class="flex-row"><input type="text" class="field-top" placeholder="عنوان (مثل الخبرة المهنية)"></div>
-                </div>
-                <div class="form-group"><label>الوصف والملاحظة (مائل/مقابل)</label>
-                    <div class="flex-row"><input type="text" class="field-mid" placeholder="نص المحتوى"><input type="text" class="field-info" placeholder="مذكرة إعلامية"></div>
-                </div>
-                <div class="form-group"><label>نقاط التبويب</label>
-                    <div id="small_items_${bodySectionCount}"></div>
-                    <button class="toggle-btn active" onclick="addSmallItem('small_items_${bodySectionCount}')" style="background:#28a745; margin-top:0.5rem;">+ إضافة عنصر</button>
-                </div>
+            const div = document.createElement('div'); div.className = 'main-field'; div.id = `sec_${bodyCount}`;
+            div.innerHTML = `
+                <button class="remove-btn" onclick="removeElement('sec_${bodyCount}')">×</button>
+                <h3>قسم التعليم</h3>
+                <div class="form-group"><label>عنوان القسم:</label><div class="flex-row"><input type="text" class="field-top" placeholder="التعليم"><input type="text" class="field-top2" placeholder="اختياري (الدرجة...)"></div></div>
+                <div class="form-group"><label>الجامعة والموقع:</label><div class="flex-row"><input type="text" class="field-mid" placeholder="الجامعة"><input type="text" class="field-info" placeholder="الموقع"></div></div>
+                <div class="form-group"><label>الدرجة والتفاصيل (اختياري):</label><input type="text" class="field-down-single" placeholder="التخصص، المعدل..."></div>
             `;
-            container.appendChild(sectionDiv);
+            container.appendChild(div);
         }
 
         function addListSection() {
@@ -341,280 +498,185 @@
             const div = document.createElement('div'); div.className = 'list-field-card'; div.id = `list_sec_${listSectionCount}`;
             div.innerHTML = `
                 <button class="remove-btn" onclick="removeElement('list_sec_${listSectionCount}')">×</button>
-                <h3>قسم القائمة</h3>
-                <div class="form-group"><label>عنوان القسم:</label><input type="text" class="l-huge" placeholder="هذا هو العنوان الرئيسي لقسم القائمة"></div>
-                <div class="form-group"><label>العنوان المتوسط والملاحظة:</label><div class="flex-row"><input type="text" class="l-med" placeholder="الوصف"><input type="text" class="l-info" placeholder="اكتب التفاصيل الإضافية هنا.."></div></div>
-                <div id="list_items_${listSectionCount}"></div>
-                <button class="toggle-btn active" onclick="addListItem('list_items_${listSectionCount}')" style="background:#9b59b6;">+ إضافة عنصر قائمة</button>
+                <h3>قسم الخبرة</h3>
+                <div class="form-group"><label>عنوان القسم:</label><input type="text" class="l-huge" placeholder="الخبرة العملية"></div>
+                <div class="form-group"><label>المنظمة والموقع:</label><div class="flex-row"><input type="text" class="l-org" placeholder="الشركة"><input type="text" class="l-loc" placeholder="المدينة"></div></div>
+                <div class="form-group"><label>المسمى والتواريخ:</label><div class="flex-row"><input type="text" class="l-med" placeholder="الدور الوظيفي"><input type="text" class="l-info" placeholder="التاريخ"></div></div>
+                <div class="desc-box">
+                    <div id="bullets_list_${listSectionCount}"></div>
+                    <button class="toggle-btn active" onclick="addDescRow('bullets_list_${listSectionCount}')" style="background:#9b59b6; width:100%;">+ إضافة وصف</button>
+                </div>
             `;
             container.appendChild(div);
         }
 
-        function addListItem(targetId) {
-            const list = document.getElementById(targetId); const rowId = Date.now();
-            const group = document.createElement('div'); group.className = 'dynamic-item'; group.id = `li_${rowId}`;
-            group.innerHTML = `
-                <button class="remove-btn" onclick="removeElement('li_${rowId}')">×</button>
-                <div class="flex-row"><input type="text" class="li-bold" placeholder="بولد (اسم الشهادة)"> <input type="text" class="li-norm" placeholder="(على سبيل المثال: التفاصيل)"></div>
+        function addLeadershipSection() {
+            listSectionCount++;
+            const container = document.getElementById('leadershipSectionsContainer');
+            const div = document.createElement('div'); div.className = 'leadership-field-card'; div.id = `lead_sec_${listSectionCount}`;
+            div.innerHTML = `
+                <button class="remove-btn" onclick="removeElement('lead_sec_${listSectionCount}')">×</button>
+                <h3>القيادة والأنشطة</h3>
+                <div class="form-group"><label>عنوان القسم:</label><input type="text" class="l-huge" placeholder="القيادة والأنشطة"></div>
+                <div class="form-group"><label>المنظمة والموقع:</label><div class="flex-row"><input type="text" class="l-org" placeholder="الجهة"><input type="text" class="l-loc" placeholder="الموقع"></div></div>
+                <div class="form-group"><label>الدور والتواريخ:</label><div class="flex-row"><input type="text" class="l-med" placeholder="الدور"><input type="text" class="l-info" placeholder="التاريخ"></div></div>
+                <div class="desc-box">
+                    <div id="bullets_lead_${listSectionCount}"></div>
+                    <button class="toggle-btn active" onclick="addDescRow('bullets_lead_${listSectionCount}')" style="background:#3498db; width:100%;">+ إضافة وصف</button>
+                </div>
             `;
-            list.appendChild(group);
+            container.appendChild(div);
         }
 
-        function addTagCategory() {
-            tagCategoryCount++;
-            const container = document.getElementById('tagCategoriesContainer');
-            const catDiv = document.createElement('div'); catDiv.className = 'dynamic-item'; catDiv.id = `tag_cat_${tagCategoryCount}`;
-            catDiv.innerHTML = `
-                <button class="remove-btn" onclick="removeElement('tag_cat_${tagCategoryCount}')">×</button>
-                <div class="form-group"><label>اسم الفئة</label><input type="text" class="cat-name" placeholder="تسمية لمجموعة من العلامات ذات الصلة"></div>
-                <div class="tag-row" id="tag_list_${tagCategoryCount}"></div>
-                <button class="toggle-btn active" onclick="addTagToCat('tag_list_${tagCategoryCount}')" style="background:#e67e22; margin-top:0.5rem;">+ إضافة علامة</button>
+        function addDescRow(containerId) {
+            const container = document.getElementById(containerId);
+            const id = Date.now();
+            const row = document.createElement('div');
+            row.className = 'desc-row';
+            row.id = `row_${id}`;
+            row.innerHTML = `
+                <button class="toggle-btn" style="background:#ff4757; width:30px; padding:0;" onclick="removeElement('row_${id}')">×</button>
+                <button class="btn-bullet-toggle is-bullet" onclick="this.classList.toggle('is-bullet')">قائمة</button>
+                <input type="text" class="desc-val" placeholder="وصف العنصر...">
             `;
-            container.appendChild(catDiv);
+            container.appendChild(row);
         }
 
-        function addTagToCat(listId) {
-            const list = document.getElementById(listId); const tagId = Date.now();
-            const group = document.createElement('div'); group.className = 'flex-row'; group.id = `tag_${tagId}`; group.style.marginBottom = "5px";
-            group.innerHTML = `<input type="text" class="tag-val" style="padding:0.4rem;" placeholder="أضف علامتك (المهارة)"><button class="toggle-btn active" style="background:#ff4757;" onclick="removeElement('tag_${tagId}')">×</button>`;
-            list.appendChild(group);
+        function addSkillCategory() {
+            skillCatCount++;
+            const container = document.getElementById('skillsCategoriesContainer');
+            const id = Date.now();
+            const div = document.createElement('div'); div.className = 'dynamic-item'; div.id = `skill_cat_${id}`;
+            div.innerHTML = `
+                <button class="remove-btn" onclick="removeElement('skill_cat_${id}')">×</button>
+                <div class="form-group"><label>اسم الفئة:</label><input type="text" class="cat-name" placeholder="تقني/اهتمامات"></div>
+                <div id="tags_${id}" class="tag-row"></div>
+                <button class="toggle-btn active" onclick="addTag('tags_${id}')" style="background:#e67e22; margin-top:5px;">+ إضافة بند</button>
+            `;
+            container.appendChild(div);
         }
 
-        function addSmallItem(containerId) {
-            const container = document.getElementById(containerId); const itemId = Date.now();
-            const group = document.createElement('div'); group.className = 'flex-row'; group.id = `small_${itemId}`; group.style.marginBottom = "5px";
-            group.innerHTML = `<input type="text" class="field-down" style="padding:0.4rem;" placeholder="نص ملاحظة صغيرة..."><button class="toggle-btn active" style="background:#ff4757;" onclick="removeElement('small_${itemId}')">×</button>`;
-            container.appendChild(group);
-        }
-
-        function toggleSize(btn) {
-            const hiddenInput = btn.nextElementSibling;
-            if (btn.textContent === 'كبير') { btn.textContent = 'متوسط'; btn.classList.remove('active'); hiddenInput.value = 'medium'; }
-            else { btn.textContent = 'كبير'; btn.classList.add('active'); hiddenInput.value = 'large'; }
+        function addTag(targetId) {
+            const target = document.getElementById(targetId);
+            const id = Date.now();
+            const div = document.createElement('div'); div.className = 'flex-row'; div.id = `t_${id}`; div.style.marginBottom = "5px";
+            div.innerHTML = `<input type="text" class="tag-val" placeholder="مهارة/اهتمام"><button class="toggle-btn active" style="background:#ff4757;" onclick="removeElement('t_${id}')">×</button>`;
+            target.appendChild(div);
         }
 
         function removeElement(id) { document.getElementById(id).remove(); }
 
         function generateCode() {
-            const primary = "#000000";
-            const secondary = "#000000";
-            const hugeText = document.getElementById('headerHugeText').value;
-
-            let headerItemsHtml = '';
-            document.querySelectorAll('.dynamic-item:has(.h-value)').forEach((item) => {
-                const type = item.querySelector('.h-type').value;
-                const val = item.querySelector('.h-value').value;
-
-                let labelHtml = type ? `<span class="contact-label">${type}:</span>` : '';
-                let valueHtml = val;
-
-                headerItemsHtml += `
-                <li class="contact-item">
-                    ${labelHtml}
-                    <span class="contact-value">${valueHtml}</span>
-                </li>`;
-            });
+            const name = document.getElementById('headerHugeText').value;
+            let contacts = [];
+            document.querySelectorAll('#headerItemsContainer .h-value').forEach(el => { if (el.value.trim()) contacts.push(el.value.trim()); });
+            const contactHtml = contacts.join(' • ');
 
             let sectionsHtml = '';
-            document.querySelectorAll('.main-field').forEach(sec => {
-                const top = sec.querySelector('.field-top').value;
-                const mid = sec.querySelector('.field-mid').value;
-                const info = sec.querySelector('.field-info').value;
+            document.querySelectorAll('.main-field').forEach(s => {
+                const title = s.querySelector('.field-top').value;
+                const title2 = s.querySelector('.field-top2') ? s.querySelector('.field-top2').value : '';
+                const mid = s.querySelector('.field-mid').value;
+                const info = s.querySelector('.field-info').value;
+                const down = s.querySelector('.field-down-single').value;
+                const titleHtml = title2 ? `${title} <span style="font-weight:normal;">${title2}</span>` : title;
+                sectionsHtml += `
+                <section>
+                    <h2 class="section-title">${titleHtml}</h2>
+                    <div class="row-bold"><strong>${mid}</strong><strong>${info}</strong></div>
+                    <div class="row-plain">${down}</div>
+                </section>`;
+            });
 
-                let smallItemsHtml = '';
-                sec.querySelectorAll('.field-down').forEach(item => {
-                    if (item.value.trim()) {
-                        smallItemsHtml += `<li>${item.value}</li>`;
+            let listHtml = '';
+            document.querySelectorAll('.list-field-card, .leadership-field-card').forEach(s => {
+                const title = s.querySelector('.l-huge').value;
+                const org = s.querySelector('.l-org').value;
+                const loc = s.querySelector('.l-loc').value;
+                const role = s.querySelector('.l-med').value;
+                const dates = s.querySelector('.l-info').value;
+
+                let combinedDesc = '';
+                let currentList = '';
+
+                s.querySelectorAll('.desc-row').forEach(row => {
+                    const text = row.querySelector('.desc-val').value.trim();
+                    const isBullet = row.querySelector('.btn-bullet-toggle').classList.contains('is-bullet');
+
+                    if (text) {
+                        if (isBullet) {
+                            currentList += `<li>${text}</li>`;
+                        } else {
+                            if (currentList) {
+                                combinedDesc += `<ul>${currentList}</ul>`;
+                                currentList = '';
+                            }
+                            combinedDesc += `<div style="font-size:11pt; margin: 2px 0;">${text}</div>`;
+                        }
                     }
                 });
+                if (currentList) combinedDesc += `<ul>${currentList}</ul>`;
 
-                sectionsHtml += `
-                <section class="section-box">
-                    <h2 class="section-title">${top}</h2>
-                    <div class="job-article">
-                        <div class="job-header">
-                            <h3 class="job-title">${mid}</h3> 
-                            <div class="job-date-loc">${info}</div>
-                        </div>
-                        ${smallItemsHtml ? `<ul>${smallItemsHtml}</ul>` : ''}
-                    </div>
-                </section><hr class="section-separator">`;
+                listHtml += `
+                <section>
+                    <h2 class="section-title">${title}</h2>
+                    <div class="row-bold"><strong>${org}</strong><strong>${loc}</strong></div>
+                    <div class="row-plain"><span>${role}</span><span>${dates}</span></div>
+                    ${combinedDesc}
+                </section>`;
             });
 
-            let listSectionsHtml = '';
-            document.querySelectorAll('.list-field-card').forEach(sec => {
-                const huge = sec.querySelector('.l-huge').value;
-                const med = sec.querySelector('.l-med').value;
-                const info = sec.querySelector('.l-info').value;
-
-                let itemsHtml = '';
-                sec.querySelectorAll('.dynamic-item').forEach(item => {
-                    itemsHtml += `<li><strong>${item.querySelector('.li-bold').value}</strong> ${item.querySelector('.li-norm').value}</li>`;
-                });
-
-                let medHtml = med ? `<p><strong>${med}</strong> ${info}</p>` : '';
-
-                listSectionsHtml += `
-                <section class="section-box list-section">
-                    <h2 class="section-title">${huge}</h2>
-                    ${medHtml}
-                    <ul>${itemsHtml}</ul>
-                </section><hr class="section-separator">`;
+            const skillsTitle = document.getElementById('skillsSectionHeader').value || 'المهارات والاهتمامات';
+            let skillsInner = '';
+            document.querySelectorAll('#skillsCategoriesContainer .dynamic-item').forEach(c => {
+                const catName = c.querySelector('.cat-name').value;
+                let tags = [];
+                c.querySelectorAll('.tag-val').forEach(t => { if (t.value.trim()) tags.push(t.value.trim()); });
+                if (tags.length) skillsInner += `<div class="skills-row"><strong>${catName}:</strong> ${tags.join('، ')}</div>`;
             });
 
-            const tagTitle = document.getElementById('tagSectionHeader').value;
-            let tagsInnerHtml = '';
-            document.querySelectorAll('#tagCategoriesContainer .dynamic-item').forEach(cat => {
-                const name = cat.querySelector('.cat-name').value;
-                let innerTags = [];
-                cat.querySelectorAll('.tag-val').forEach(t => { innerTags.push(t.value); });
-
-                if (innerTags.length > 0) {
-                    tagsInnerHtml += `<div class="skills-row"><span class="skill-category">${name}:</span> ${innerTags.join('، ')}</div>`;
-                }
-            });
-
-            let tagsSectionHtml = (tagTitle || tagsInnerHtml) ? `
-            <section class="section-box skills-section">
-                <h2 class="section-title">${tagTitle}</h2>
-                ${tagsInnerHtml}
-            </section><hr class="section-separator">` : '';
-
-            const htmlContent = `<!DOCTYPE html>
+            const html = `<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${hugeText || 'CV'}</title>
+    <meta charset="UTF-8"><title>${name || 'CV'}</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Roboto:wght@400;500&display=swap');
-        :root { --primary-color: ${primary}; --secondary-color: ${secondary}; --text-color: #333; }
-        body { 
-            font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif; 
-            margin: 0; 
-            padding: 40px; 
-            color: var(--text-color); 
-            background: white; 
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            direction: rtl;
-            text-align: right;
-        }
-        header { margin-bottom: 25px; }
-        h1 { 
-            font-size: 32px; 
-            font-weight: 700; 
-            color: #000; 
-            margin: 0 0 10px 0; 
-        }
-        address { 
-            font-size: 14px; 
-            line-height: 1.6;
-            font-style: normal;
-        }
-        ul.contact-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        li.contact-item { display: flex; align-items: baseline; gap: 5px; margin-bottom: 2px; }
-        .contact-label { 
-            font-weight: 700; 
-            min-width: 80px; /* Fixed width for labels */
-            flex-shrink: 0;
-            color: #000;
-            margin-left: 10px;
-        }
-        .contact-value { color: #333; }
-        .contact-value a { 
-            color: #000; 
-            text-decoration: none; 
-            dir: ltr; /* Ensure phones/emails render correctly */
-            display: inline-block;
-        }
-        .contact-value a:hover { text-decoration: underline; }
-
-        section { margin-bottom: 15px; }
-
-        h2.section-title { 
-            font-size: 18px; 
-            font-weight: 700; 
-            color: #000; 
-            border-bottom: 1px solid #ddd; 
-            padding-bottom: 5px; 
-            margin: 25px 0 15px 0; 
-        }
-
-        .job-article { margin-bottom: 20px; }
-        .job-header { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: baseline; 
-            margin-bottom: 5px;
-        }
-        .job-title { margin: 0; font-weight: 700; font-size: 16px; color: #000; }
-        .job-company { font-weight: 700; }
-        .job-date-loc { font-style: italic; color: #555; font-size: 14px; }
-        .job-description { margin-bottom: 5px; text-align: justify; }
-
-        ul { margin: 5px 0; padding-right: 20px; padding-left: 0; }
-        li { margin-bottom: 3px; font-size: 14px; }
-
-        .skills-section ul {
-            list-style: none; 
-            padding: 0;
-            margin: 0;
-        }
-        .skills-row { margin-bottom: 5px; }
-        .skill-category { font-weight: 700; display: inline; margin-left: 5px;}
-        
-        .section-separator { border: 0; border-bottom: 1px solid #ddd; margin: 30px 0; }
-        main > .section-separator:last-child { display: none; }
-        
-        @media print {
-            @page { margin: 0; }
-            body { padding: 0; margin: 1.6cm; }
-        }
+        @page { margin: 0.5in; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.3; color: #000; padding: 0; margin: 0; direction: rtl; text-align: right; }
+        header { text-align: center; margin-bottom: 5px; }
+        h1 { font-size: 18pt; margin: 0; border-bottom: 1.5pt solid #000; padding-bottom: 4px; width: 100%; }
+        .contact-info { font-size: 11pt; margin: 5px 0 10px 0; }
+        section { margin-bottom: 8px; }
+        .section-title { font-size: 13pt; font-weight: bold; text-align: center; margin: 10px 0 4px 0; }
+        .row-bold { display: flex; justify-content: space-between; font-weight: bold; font-size: 12pt; }
+        .row-plain { display: flex; justify-content: space-between; font-size: 11pt; margin-top: 2px; }
+        ul { margin: 2px 0; padding-right: 25px; }
+        li { font-size: 11pt; margin-bottom: 1px; }
+        .skills-row { font-size: 11pt; margin-bottom: 2px; }
     </style>
 </head>
 <body>
-    <header>
-        <h1>${hugeText}</h1>
-        <address>
-            <ul class="contact-list">
-                ${headerItemsHtml}
-            </ul>
-        </address>
-    </header>
-
-    <main>
-        ${sectionsHtml}
-        ${listSectionsHtml}
-        ${tagsSectionHtml}
-    </main>
-</body>
-</html>`;
-            document.getElementById('outputCode').value = htmlContent;
+    <header><h1>${name}</h1><div class="contact-info">${contactHtml}</div></header>
+    <main>${sectionsHtml}${listHtml}<section><h2 class="section-title">${skillsTitle}</h2>${skillsInner}</section></main>
+</body></html>`;
+            document.getElementById('outputCode').value = html;
         }
 
         function printAsPDF() {
             const code = document.getElementById('outputCode').value;
-            if (!code) {
-                alert("Please generate the code first!");
-                return;
-            }
-            const printWindow = window.open('', '_blank');
-            printWindow.document.write(code);
-            printWindow.document.close();
-            printWindow.focus();
-            setTimeout(() => {
-                printWindow.print();
-
-            }, 500);
+            if (!code) return alert("أنشئ الكود أولاً!");
+            const win = window.open('', '_blank');
+            win.document.write(code);
+            win.document.close();
+            win.focus();
+            setTimeout(() => { win.print(); }, 500);
         }
 
-        addHeaderItem(); addHeaderItem(); addBodySection(); addListSection(); addTagCategory();
+        function printAsDocx() {
+            const code = document.getElementById('outputCode').value;
+            if (!code) return alert("أنشئ الكود أولاً!");
+            const converted = htmlDocx.asBlob(code);
+            saveAs(converted, 'resume_ar.docx');
+        }
     </script>
 </body>
 

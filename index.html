@@ -1,89 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>Main menu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
-  margin: 0;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-color: #f5f5f5;
-  font-family: Arial, sans-serif;
-}
-
-.main-content {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.button-container {
-  display: flex;
-  gap: 20px;
-}
-
-.btn {
-  padding: 15px 40px;
-  font-size: 18px;
-  border: none;
-  border-radius: 6px;
-  background-color: #4169e1;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
-}
-
-.btn:hover {
-  background-color: #3153b5;
-  transform: translateY(-1px);
-}
-
-.btn:active {
-  transform: translateY(1px);
-}
-.header {
-      margin-top: auto;          
-      width: 100%;
-      background-color: #222;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: radial-gradient(circle at top right, #1a1a1a, #000);
+      font-family: 'Outfit', sans-serif;
       color: #fff;
-      text-align: center;
-      padding: 15px 10px;
-      font-size: 14px;
+      overflow-x: hidden;
     }
 
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+      text-align: center;
+      background: linear-gradient(45deg, #1a73e8, #ff4757);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -2px;
+      text-transform: uppercase;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 24px;
+      background: rgba(26, 115, 232, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 3.5rem;
+      border-radius: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    .btn {
+      padding: 18px 45px;
+      font-size: 18px;
+      font-weight: 700;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      background-color: #ff4757;
+      /* 30% Red */
+      color: white;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 10px 20px rgba(255, 71, 87, 0.2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 20px 40px rgba(255, 71, 87, 0.4);
+      filter: brightness(1.2);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .header,
+    .footer {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      color: #888;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 13px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      letter-spacing: 1px;
+    }
 
     .footer {
-      margin-top: auto;          
-      width: 100%;
-      background-color: #222;
-      color: #fff;
-      text-align: center;
-      padding: 15px 10px;
-      font-size: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: none;
+      margin-top: auto;
     }
   </style>
 </head>
+
 <body>
   <Header class="header">
     <div>
-      <img src="pages/Images/MM.png" alt="Logo" 
-      style="cursor:pointer; height: 30px; vertical-align: middle; object-fit: cover; border-radius: 12px;"
-      onclick="window.location.href='https://abdullah-hamad-almousa.github.io/MyNewPortfolio/'" />
+      <img src="pages/Images/MM.png" alt="Logo"
+        style="cursor:pointer; height: 30px; vertical-align: middle; object-fit: cover; border-radius: 12px;"
+        onclick="window.location.href='https://my-resume-kappa-one.vercel.app/'" />
     </div>
   </Header>
-  <div class="main-content button-container">
-    <button class="btn" onclick="window.location.href='pages/engCvCreator.html'">
-      English CV creator
-    </button>
-    <button class="btn" onclick="window.location.href='pages/arCvCreator.html'">
-      منشئ السيرة الذاتية العربية
-    </button>
-    <button class="btn" onclick="window.location.href='index.html'">
-      Coming Soon
-    </button>
+  <div class="main-content">
+    <h1 class="hero-title">CV MASTER AI</h1>
+    <div class="button-container">
+      <button class="btn" onclick="window.location.href='pages/engCvCreator.html'">
+        English Builder
+      </button>
+      <button class="btn" onclick="window.location.href='pages/arCvCreator.html'">
+        المنشئ العربي
+      </button>
+      <button class="btn" style="opacity: 0.5; cursor: not-allowed;" onclick="return false;">
+        Coming Soon
+      </button>
+    </div>
   </div>
   <footer class="footer">
     <p>
@@ -91,4 +136,5 @@
     </p>
   </footer>
 </body>
+
 </html>
