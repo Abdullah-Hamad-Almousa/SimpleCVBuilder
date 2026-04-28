@@ -1,689 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV Advanced Generator - Harvard Style</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Outfit', sans-serif;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-            line-height: 1.6;
-            background: radial-gradient(circle at top right, #1a1a1a, #000);
-            color: #fff;
-            min-height: 100vh;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV Advanced Generator - Harvard Style</title>
+  <script>
+    window.CV_CONFIG = {
+      lang: 'en',
+      labels: {
+        educationSection: 'Education Section',
+        experienceSection: 'Experience Section',
+        leadershipSection: 'Leadership & Activities',
+        skillsTitle: 'Skills & Interests (Optional):',
+        addSkillCategory: '+ Add Skill Category',
+        skillsSectionHeaderLabel: 'Section Title:',
+        skillsSectionHeaderPlaceholder: 'Skills & Interests',
+        addEducation: '+ Add Education',
+        addExperience: '+ Add Experience',
+        addLeadership: '+ Add Leadership',
+        generateCode: 'Generate Final HTML Code',
+        outputTitle: 'Generated Source Code:',
+        printPdf: 'Print as PDF',
+        printDocx: 'Print as DOCX',
+        alertGenerateFirst: 'Generate code first!',
+        confirmClear: 'Are you sure you want to clear all data?',
+        headerValuePlaceholder: 'Value...',
+        education: {
+          titleLabel: 'Section Title:',
+          titlePlaceholder: 'Education',
+          title2Placeholder: 'Education Field',
+          orgLabel: 'University & Location:',
+          orgPlaceholder: 'University',
+          locPlaceholder: 'Location',
+          detailsLabel: 'Degree & Details (optional):',
+          detailsPlaceholder: 'Degree, GPA etc.'
+        },
+        experience: {
+          titleLabel: 'Section Title:',
+          titlePlaceholder: 'Experience Job, Project',
+          orgLabel: 'Organization & Location:',
+          orgPlaceholder: 'Company',
+          locPlaceholder: 'City',
+          roleLabel: 'Position & Dates:',
+          rolePlaceholder: 'Role',
+          datePlaceholder: 'Dates',
+          addDesc: 'Add Description'
+        },
+        leadership: {
+          titleLabel: 'Section Title:',
+          titlePlaceholder: 'Leadership, Activities',
+          orgLabel: 'Organization & Location:',
+          orgPlaceholder: 'Org',
+          locPlaceholder: 'Loc',
+          roleLabel: 'Role & Dates:',
+          rolePlaceholder: 'Role',
+          datePlaceholder: 'Dates',
+          addDesc: 'Add Description'
+        },
+        skills: {
+          categoryLabel: 'Category Name:',
+          categoryPlaceholder: 'Technical/Interests',
+          addItem: 'Add Item',
+          itemPlaceholder: 'Skill/Interest'
+        },
+        desc: {
+          bulletLabel: 'Bullet',
+          placeholder: 'Description item...'
+        },
+        headerTypes: ['Phone','Email','LinkedIn','GitHub','Portfolio','Location','Kaggle','Website'],
+        aria: {
+          removeContact: 'Remove contact item',
+          removeEducation: 'Remove education section',
+          removeExperience: 'Remove experience section',
+          removeLeadership: 'Remove leadership section',
+          removeDesc: 'Remove description row',
+          removeSkillCategory: 'Remove skill category',
+          removeTag: 'Remove tag'
         }
-
-        h1 {
-            font-weight: 700;
-            letter-spacing: -1px;
-            margin-bottom: 2.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            background: linear-gradient(45deg, #1a73e8, #ff4757);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .config-section {
-            background: rgba(26, 115, 232, 0.08);
-            /* 60% Blue theme */
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            margin-bottom: 2.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .config-section::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background: #ff4757;
-            /* 30% Red accent */
-        }
-
-        .config-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 0.5rem;
-        }
-
-        .config-header h3 {
-            margin: 0;
-            color: #fff;
-        }
-
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.4rem;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        input,
-        select {
-            width: 100%;
-            padding: 0.85rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            color: #fff;
-            font-family: inherit;
-            transition: all 0.3s ease;
-        }
-
-        input:focus,
-        select:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.1);
-            border-color: #1a73e8;
-            box-shadow: 0 0 15px rgba(26, 115, 232, 0.3);
-        }
-
-        /* Improved placeholder visibility */
-        input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        /* Clear select options on dark theme */
-        select option {
-            background-color: #111;
-            color: #fff;
-        }
-
-        .dynamic-item {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(8px);
-            padding: 1.2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            margin-bottom: 1.2rem;
-            transition: all 0.3s ease;
-            overflow: hidden;
-        }
-
-        .dynamic-item::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: #1a73e8;
-            /* Blue accent for items */
-        }
-
-        .dynamic-item:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(26, 115, 232, 0.3);
-        }
-
-        #sectionsContainer,
-        #listSectionsContainer,
-        #leadershipSectionsContainer {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .main-field,
-        .list-field-card {
-            background: rgba(26, 115, 232, 0.08);
-            /* 60% Blue */
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            position: relative;
-            transition: transform 0.3s ease;
-        }
-
-        .main-field:hover,
-        .list-field-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(26, 115, 232, 0.5);
-        }
-
-        .main-field::before,
-        .list-field-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: #ff4757;
-            /* 30% Red */
-            border-radius: 20px 20px 0 0;
-        }
-
-        .list-field-card {
-            border-top-color: #1a73e8;
-            /* 60% Blue */
-        }
-
-        .leadership-field-card {
-            background: rgba(26, 115, 232, 0.08);
-            /* 60% Blue */
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            position: relative;
-            margin-bottom: 2rem;
-            transition: transform 0.3s ease;
-        }
-
-        .leadership-field-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(26, 115, 232, 0.5);
-        }
-
-        .leadership-field-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: #ff4757;
-            /* 30% Red */
-            border-radius: 20px 20px 0 0;
-        }
-
-        .tag-field-card {
-            background: rgba(26, 115, 232, 0.05);
-            backdrop-filter: blur(12px);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            margin-bottom: 2.5rem;
-        }
-
-        .flex-row {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
-
-        .remove-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #ff4757;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            font-weight: bold;
-        }
-
-        .toggle-btn {
-            background-color: #757575;
-            /* 10% Gray */
-            color: white;
-            border: 1px solid #fff;
-            padding: 0 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: bold;
-            height: 38px;
-        }
-
-        .toggle-btn.active {
-            background-color: #ff4757;
-            box-shadow: 0 0 15px rgba(255, 71, 87, 0.4);
-        }
-
-        .controls {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            position: sticky;
-            bottom: 1rem;
-            z-index: 100;
-        }
-
-        .btn-action {
-            flex: 1;
-            padding: 1.2rem;
-            cursor: pointer;
-            border-radius: 10px;
-            font-weight: 700;
-            border: none;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .add-btn {
-            background-color: #ff4757;
-            color: white;
-            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
-        }
-
-        .list-btn {
-            background-color: rgba(26, 115, 232, 0.2);
-            color: white;
-            border: 1px solid rgba(26, 115, 232, 0.3);
-            backdrop-filter: blur(12px);
-        }
-
-        .btn-blue {
-            background-color: #ff4757 !important;
-            color: white;
-        }
-
-        .btn-yellow {
-            background-color: #ff4757 !important;
-            color: #fff !important;
-        }
-
-        .desc-box {
-            background: #1a73e8;
-            /* 60% Blue */
-            border: 1px solid #757575;
-            /* 10% Gray */
-            padding: 10px;
-            border-radius: 8px;
-            margin-top: 10px;
-        }
-
-        .desc-row {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 8px;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 5px;
-            border-radius: 6px;
-        }
-
-        .btn-bullet-toggle {
-            min-width: 80px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 6px;
-            cursor: pointer;
-            padding: 5px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .btn-bullet-toggle.is-bullet {
-            background: #2ed573;
-            color: white;
-            border-color: #23b561;
-        }
-
-        .btn-bullet-toggle.is-bullet::after {
-            content: " (List)";
-        }
-
-        .btn-bullet-toggle:not(.is-bullet)::after {
-            content: " (Text)";
-        }
-
-        textarea {
-            width: 100%;
-            height: 300px;
-            font-family: monospace;
-            padding: 1rem;
-            border: 2px solid #ddd;
-            border-radius: 12px;
-            background: #2d3436;
-            color: #dfe6e9;
-            margin-top: 1rem;
-        }
-
-        @media print {
-
-            .config-section,
-            .tag-field-card,
-            .controls,
-            .output-box,
-            div[style*="justify-content: space-between"],
-            footer,
-            .remove-btn,
-            .toggle-btn,
-            h3,
-            .desc-box {
-                display: none !important;
-            }
-        }
-    </style>
-    <script src="https://cdn.jsdelivr.net/gh/evidenceprime/html-docx-js@master/dist/html-docx.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+      },
+      output: {
+        defaultTitle: 'CV',
+        lang: 'en',
+        dir: '',
+        bodyTextAlign: '',
+        lineHeight: '1.1',
+        fontSizeH1: '11pt',
+        fontSizeSection: '11pt',
+        fontSizeContact: '10pt',
+        fontSizeRowBold: '10.5pt',
+        fontSizeRowPlain: '10pt',
+        fontSizeLi: '10pt',
+        fontSizeSkills: '10pt',
+        ulPadding: 'padding-left: 20px',
+        skillsSeparator: ', ',
+        defaultSkillsTitle: 'Skills & Interests',
+        docxFilename: 'resume.docx',
+        pdfFilename: 'resume.pdf'
+      }
+    };
+  </script>
+  <script src="js/html-docx.js"></script>
+  <script src="js/FileSaver.min.js"></script>
+  <script src="js/html2pdf.bundle.min.js"></script>
+  <script type="module" crossorigin src="../assets/builder-COea_cbF.js"></script>
+  <link rel="stylesheet" crossorigin href="../assets/builder-8RNFfinm.css">
 </head>
-
 <body>
-    <div
-        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 3px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
-        <h1 style="border:none; padding:0; margin:0;">CV Advanced Generator</h1>
-        <div style="display: flex; gap: 1rem; align-items: center;">
-            <button class="toggle-btn active" onclick="window.location.href='../index.html'"
-                style="background-color: var(--secondary-color, #ff4757);">Go Back</button>
-            <img src="Images/MM.png" alt="Logo" style="cursor:pointer; height: 40px; border-radius: 8px;"
-                onclick="window.location.href='https://abdullah-hamad-almousa.github.io/MyNewPortfolio/pages/Linkes/Links.html'" />
-        </div>
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 3px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
+    <h1 style="border:none; padding:0; margin:0;">CV Advanced Generator</h1>
+    <div style="display: flex; gap: 1rem; align-items: center;">
+      <button class="toggle-btn active" onclick="window.location.href='../index.html'" style="background-color: #ff4757;">Go Back</button>
+      <img src="../assets/MM-BXzI00lk.png" alt="Logo" style="cursor:pointer; height: 40px; border-radius: 8px;" onclick="window.location.href='https://abdullah-hamad-almousa.github.io/MyNewPortfolio/pages/Linkes/Links.html'" />
     </div>
+  </div>
 
-    <div class="config-section">
-        <div class="config-header">
+  <div class="builder-layout">
+    <!-- Wizard Panel -->
+    <div class="wizard-panel">
+      <!-- Stepper -->
+      <div class="stepper">
+        <div class="step"><div class="step-circle">1</div><div class="step-label">Personal Info</div></div>
+        <div class="step"><div class="step-circle">2</div><div class="step-label">Summary</div></div>
+        <div class="step"><div class="step-circle">3</div><div class="step-label">Experience</div></div>
+        <div class="step"><div class="step-circle">4</div><div class="step-label">Education</div></div>
+        <div class="step"><div class="step-circle">5</div><div class="step-label">Skills</div></div>
+        <div class="step"><div class="step-circle">6</div><div class="step-label">Preview</div></div>
+      </div>
+
+      <!-- Step 1: Personal Info -->
+      <div class="wizard-step active">
+        <div class="config-section">
+          <div class="config-header">
             <h3>Name & Contact</h3>
             <button class="toggle-btn active" id="addHeaderBtn" onclick="addHeaderItem()">+ Add Contact Item</button>
-        </div>
-        <div class="form-group">
+          </div>
+          <div class="form-group">
             <label>Name:</label>
             <input type="text" id="headerHugeText" placeholder="Your Full Name">
+          </div>
+          <div id="headerItemsContainer" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;"></div>
         </div>
-        <div id="headerItemsContainer" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;"></div>
-    </div>
+      </div>
 
-    <div id="sectionsContainer"></div>
-    <div id="listSectionsContainer"></div>
-    <div id="leadershipSectionsContainer"></div>
+      <!-- Step 2: Professional Summary -->
+      <div class="wizard-step">
+        <div class="config-section">
+          <div class="config-header">
+            <h3>Professional Summary</h3>
+          </div>
+          <div class="form-group">
+            <label>Summary:</label>
+            <div class="rich-editor-toolbar">
+              <button onclick="formatText('bold')" title="Bold"><b>B</b></button>
+              <button onclick="formatText('italic')" title="Italic"><i>I</i></button>
+              <button onclick="formatText('underline')" title="Underline"><u>U</u></button>
+              <span class="toolbar-separator"></span>
+              <div class="color-swatch" style="background:#000000" onclick="setTextColor('#000000')" title="Black"></div>
+              <div class="color-swatch" style="background:#1a73e8" onclick="setTextColor('#1a73e8')" title="Blue"></div>
+              <div class="color-swatch" style="background:#ff4757" onclick="setTextColor('#ff4757')" title="Red"></div>
+              <div class="color-swatch" style="background:#2ed573" onclick="setTextColor('#2ed573')" title="Green"></div>
+              <div class="color-swatch" style="background:#e67e22" onclick="setTextColor('#e67e22')" title="Orange"></div>
+              <div class="color-swatch" style="background:#9b59b6" onclick="setTextColor('#9b59b6')" title="Purple"></div>
+              <div class="color-swatch" style="background:#34495e" onclick="setTextColor('#34495e')" title="Dark Gray"></div>
+              <div class="color-swatch" style="background:#7f8c8d" onclick="setTextColor('#7f8c8d')" title="Gray"></div>
+            </div>
+            <div id="summaryEditor" class="rich-editor" contenteditable="true" data-placeholder="Write a brief professional summary..." oninput="saveState()"></div>
+          </div>
+        </div>
+      </div>
 
-    <div class="tag-field-card">
-        <div class="config-header">
-            <h3>Skills & Interests (Optional):</h3>
+      <!-- Step 3: Experience -->
+      <div class="wizard-step">
+        <div class="config-section">
+          <div class="config-header">
+            <h3>Work Experience</h3>
+            <button class="toggle-btn active" onclick="addListSection()">+ Add Experience</button>
+          </div>
+          <div id="listSectionsContainer"></div>
+        </div>
+      </div>
+
+      <!-- Step 4: Education -->
+      <div class="wizard-step">
+        <div class="config-section">
+          <div class="config-header">
+            <h3>Education</h3>
+            <button class="toggle-btn active" onclick="addBodySection()">+ Add Education</button>
+          </div>
+          <div id="sectionsContainer"></div>
+        </div>
+      </div>
+
+      <!-- Step 5: Skills & Activities -->
+      <div class="wizard-step">
+        <div class="config-section">
+          <div class="config-header">
+            <h3>Skills & Interests</h3>
             <button class="toggle-btn active" onclick="addSkillCategory()">+ Add Skill Category</button>
-        </div>
-        <div class="form-group">
+          </div>
+          <div class="form-group">
             <label>Section Title:</label>
             <input type="text" id="skillsSectionHeader" placeholder="Skills & Interests">
+          </div>
+          <div id="skillsCategoriesContainer"></div>
         </div>
-        <div id="skillsCategoriesContainer"></div>
+        <div class="config-section">
+          <div class="config-header">
+            <h3>Leadership & Activities</h3>
+            <button class="toggle-btn active" onclick="addLeadershipSection()">+ Add Leadership</button>
+          </div>
+          <div id="leadershipSectionsContainer"></div>
+        </div>
+      </div>
+
+      <!-- Step 6: Preview & Download -->
+      <div class="wizard-step">
+        <div class="config-section">
+          <div class="config-header">
+            <h3>Preview & Download</h3>
+          </div>
+          <p style="color: rgba(255,255,255,0.7); margin-bottom: 1rem;">Your CV is rendered live in the preview panel. Use the buttons below to download or print.</p>
+          <div class="preview-actions">
+            <button class="btn-action" style="background:#3498db; color:white; width:100%; padding:1.2rem;" onclick="downloadPDF()">Download PDF</button>
+            <button class="btn-action" style="background:#e74c3c; color:white; width:100%; padding:1.2rem;" onclick="printAsPDF()">Browser Print</button>
+            <button class="btn-action" style="background:#2ecc71; color:white; width:100%; padding:1.2rem;" onclick="printAsDocx()">Print as DOCX</button>
+            <button class="btn-action" style="background:#e74c3c; color:white; width:100%; padding:1.2rem;" onclick="clearAllData()">Clear All & Start Over</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wizard Navigation -->
+      <div class="wizard-nav">
+        <button class="wizard-btn wizard-btn-prev" id="wizardPrev" onclick="prevStep()">Previous</button>
+        <button class="wizard-btn wizard-btn-next" id="wizardNext" onclick="nextStep()">Next</button>
+      </div>
     </div>
 
-    <div class="controls">
-        <button class="btn-action add-btn" onclick="addBodySection()">+ Add Education</button>
-        <button class="btn-action list-btn" onclick="addListSection()">+ Add Experience</button>
-        <button class="btn-action btn-blue" onclick="addLeadershipSection()">+ Add Leadership</button>
+    <!-- Preview Panel -->
+    <div class="preview-panel">
+      <iframe id="previewFrame"></iframe>
     </div>
-    <button class="btn-action generate-btn btn-yellow" onclick="generateCode()"
-        style="margin-bottom:2rem; width:100%;">Generate Final HTML Code</button>
+  </div>
 
-    <div class="output-box">
-        <h3>Generated Source Code:</h3>
-        <textarea id="outputCode" readonly></textarea>
-        <button class="btn-action" style="background:#e74c3c; color:white; width:100%; margin-top:1rem;"
-            onclick="printAsPDF()">Print as PDF</button>
-        <button class="btn-action" style="background:#2ecc71; color:white; width:100%; margin-top:1rem;"
-            onclick="printAsDocx()">Print as DOCX</button>
-    </div>
-
-    <script>
-        let headerItemCount = 0;
-        let bodyCount = 0;
-        let listSectionCount = 0;
-        let skillCatCount = 0;
-
-        window.onload = () => {
-            addBodySection();
-            addLeadershipSection();
-        };
-
-        function addHeaderItem() {
-            if (headerItemCount >= 8) return;
-            headerItemCount++;
-            const container = document.getElementById('headerItemsContainer');
-            const id = Date.now();
-            const div = document.createElement('div');
-            div.className = 'dynamic-item';
-            div.id = `h_item_${id}`;
-            div.innerHTML = `
-                <button class="remove-btn" onclick="removeElement('h_item_${id}'); headerItemCount--; updateHeaderBtn();">×</button>
-                <select class="h-type" style="margin-bottom:10px;">
-                    <option value="Phone">Phone</option><option value="Email">Email</option><option value="LinkedIn">LinkedIn</option>
-                    <option value="GitHub">GitHub</option><option value="Portfolio">Portfolio</option><option value="Location">Location</option>
-                    <option value="Kaggle">Kaggle</option><option value="Website">Website</option>
-                </select>
-                <input type="text" class="h-value" placeholder="Value...">
-            `;
-            container.appendChild(div);
-            updateHeaderBtn();
-        }
-        function updateHeaderBtn() { const btn = document.getElementById('addHeaderBtn'); btn.disabled = headerItemCount >= 8; btn.style.opacity = headerItemCount >= 8 ? "0.5" : "1"; }
-
-        function addBodySection() {
-            bodyCount++;
-            const container = document.getElementById('sectionsContainer');
-            const div = document.createElement('div'); div.className = 'main-field'; div.id = `sec_${bodyCount}`;
-            div.innerHTML = `
-                <button class="remove-btn" onclick="removeElement('sec_${bodyCount}')">×</button>
-                <h3>Education Section</h3>
-                <div class="form-group"><label>Section Title:</label><div class="flex-row"><input type="text" class="field-top" placeholder="Education"><input type="text" class="field-top2" placeholder="Education Field"></div></div>
-                <div class="form-group"><label>University &amp; Location:</label><div class="flex-row"><input type="text" class="field-mid" placeholder="University"><input type="text" class="field-info" placeholder="Location"></div></div>
-                <div class="form-group"><label>Degree &amp; Details (optional):</label><input type="text" class="field-down-single" placeholder="Degree, GPA etc."></div>
-            `;
-            container.appendChild(div);
-        }
-
-        function addListSection() {
-            listSectionCount++;
-            const container = document.getElementById('listSectionsContainer');
-            const div = document.createElement('div'); div.className = 'list-field-card'; div.id = `list_sec_${listSectionCount}`;
-            div.innerHTML = `
-                <button class="remove-btn" onclick="removeElement('list_sec_${listSectionCount}')">×</button>
-                <h3>Experience Section</h3>
-                <div class="form-group"><label>Section Title:</label><input placeholder="Experience Job, Project" type="text" class="l-huge"></div>
-                <div class="form-group"><label>Organization & Location:</label><div class="flex-row"><input type="text" class="l-org" placeholder="Company"><input type="text" class="l-loc" placeholder="City"></div></div>
-                <div class="form-group"><label>Position & Dates:</label><div class="flex-row"><input type="text" class="l-med" placeholder="Role"><input type="text" class="l-info" placeholder="Dates"></div></div>
-                <div class="desc-box">
-                    <div id="bullets_list_${listSectionCount}"></div>
-                    <button class="toggle-btn active" onclick="addDescRow('bullets_list_${listSectionCount}')" style="background:#9b59b6; width:100%;">+ Add Description</button>
-                </div>
-            `;
-            container.appendChild(div);
-        }
-
-        function addLeadershipSection() {
-            listSectionCount++;
-            const container = document.getElementById('leadershipSectionsContainer');
-            const div = document.createElement('div'); div.className = 'leadership-field-card'; div.id = `lead_sec_${listSectionCount}`;
-            div.innerHTML = `
-                <button class="remove-btn" onclick="removeElement('lead_sec_${listSectionCount}')">×</button>
-                <h3>Leadership & Activities</h3>
-                <div class="form-group"><label>Section Title:</label><input type="text" class="l-huge" placeholder="Leadership, Activities"></div>
-                <div class="form-group"><label>Organization & Location:</label><div class="flex-row"><input type="text" class="l-org" placeholder="Org"><input type="text" class="l-loc" placeholder="Loc"></div></div>
-                <div class="form-group"><label>Role & Dates:</label><div class="flex-row"><input type="text" class="l-med" placeholder="Role"><input type="text" class="l-info" placeholder="Dates"></div></div>
-                <div class="desc-box">
-                    <div id="bullets_lead_${listSectionCount}"></div>
-                    <button class="toggle-btn active" onclick="addDescRow('bullets_lead_${listSectionCount}')" style="background:#3498db; width:100%;">+ Add Description</button>
-                </div>
-            `;
-            container.appendChild(div);
-        }
-
-        function addDescRow(containerId) {
-            const container = document.getElementById(containerId);
-            const id = Date.now();
-            const row = document.createElement('div');
-            row.className = 'desc-row';
-            row.id = `row_${id}`;
-            row.innerHTML = `
-                <button class="toggle-btn" style="background:#ff4757; width:30px; padding:0;" onclick="removeElement('row_${id}')">×</button>
-                <button class="btn-bullet-toggle is-bullet" onclick="this.classList.toggle('is-bullet')">Bullet</button>
-                <input type="text" class="desc-val" placeholder="Description item...">
-            `;
-            container.appendChild(row);
-        }
-
-        function addSkillCategory() {
-            skillCatCount++;
-            const container = document.getElementById('skillsCategoriesContainer');
-            const id = Date.now();
-            const div = document.createElement('div'); div.className = 'dynamic-item'; div.id = `skill_cat_${id}`;
-            div.innerHTML = `
-                <button class="remove-btn" onclick="removeElement('skill_cat_${id}')">×</button>
-                <div class="form-group"><label>Category Name:</label><input type="text" class="cat-name" placeholder="Technical/Interests"></div>
-                <div id="tags_${id}" class="tag-row"></div>
-                <button class="toggle-btn active" onclick="addTag('tags_${id}')" style="background:#e67e22; margin-top:5px;">+ Add Item</button>
-            `;
-            container.appendChild(div);
-        }
-
-        function addTag(targetId) {
-            const target = document.getElementById(targetId);
-            const id = Date.now();
-            const div = document.createElement('div'); div.className = 'flex-row'; div.id = `t_${id}`; div.style.marginBottom = "5px";
-            div.innerHTML = `<input type="text" class="tag-val" placeholder="Skill/Interest"><button class="toggle-btn active" style="background:#ff4757;" onclick="removeElement('t_${id}')">×</button>`;
-            target.appendChild(div);
-        }
-
-        function removeElement(id) { document.getElementById(id).remove(); }
-
-        function generateCode() {
-            const name = document.getElementById('headerHugeText').value;
-            let contacts = [];
-            document.querySelectorAll('#headerItemsContainer .h-value').forEach(el => { if (el.value.trim()) contacts.push(el.value.trim()); });
-            const contactHtml = contacts.join(' • ');
-
-            let sectionsHtml = '';
-            document.querySelectorAll('.main-field').forEach(s => {
-                const title = s.querySelector('.field-top').value;
-                const title2 = s.querySelector('.field-top2').value;
-                const mid = s.querySelector('.field-mid').value;
-                const info = s.querySelector('.field-info').value;
-                const down = s.querySelector('.field-down-single').value;
-                const titleHtml = title2 ? `${title} <span style="font-weight:normal;">${title2}</span>` : title;
-                sectionsHtml += `
-                <section>
-                    <h2 class="section-title">${titleHtml}</h2>
-                    <div class="row-bold"><strong>${mid}</strong><strong>${info}</strong></div>
-                    ${down ? `<div class="row-plain">${down}</div>` : ''}
-                </section>`;
-            });
-
-            let listHtml = '';
-            document.querySelectorAll('.list-field-card, .leadership-field-card').forEach(s => {
-                const title = s.querySelector('.l-huge').value;
-                const org = s.querySelector('.l-org').value;
-                const loc = s.querySelector('.l-loc').value;
-                const role = s.querySelector('.l-med').value;
-                const dates = s.querySelector('.l-info').value;
-
-                let combinedDesc = '';
-                let currentList = '';
-
-                s.querySelectorAll('.desc-row').forEach(row => {
-                    const text = row.querySelector('.desc-val').value.trim();
-                    const isBullet = row.querySelector('.btn-bullet-toggle').classList.contains('is-bullet');
-
-                    if (text) {
-                        if (isBullet) {
-                            currentList += `<li>${text}</li>`;
-                        } else {
-                            if (currentList) {
-                                combinedDesc += `<ul>${currentList}</ul>`;
-                                currentList = '';
-                            }
-                            combinedDesc += `<div style="font-size:10pt; margin: 2px 0;">${text}</div>`;
-                        }
-                    }
-                });
-                if (currentList) combinedDesc += `<ul>${currentList}</ul>`;
-
-                listHtml += `
-                <section>
-                    <h2 class="section-title">${title}</h2>
-                    <div class="row-bold"><strong>${org}</strong><strong>${loc}</strong></div>
-                    <div class="row-plain"><span>${role}</span><span>${dates}</span></div>
-                    ${combinedDesc}
-                </section>`;
-            });
-
-            const skillsTitle = document.getElementById('skillsSectionHeader').value || 'Skills & Interests';
-            let skillsInner = '';
-            document.querySelectorAll('#skillsCategoriesContainer .dynamic-item').forEach(c => {
-                const catName = c.querySelector('.cat-name').value;
-                let tags = [];
-                c.querySelectorAll('.tag-val').forEach(t => { if (t.value.trim()) tags.push(t.value.trim()); });
-                if (tags.length) skillsInner += `<div class="skills-row"><strong>${catName}:</strong> ${tags.join(', ')}</div>`;
-            });
-
-            const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"><title>${name || 'CV'}</title>
-    <style>
-        @page { margin: 0.5in; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.1; color: #000; padding: 0; margin: 0; }
-        header { text-align: center; margin-bottom: 5px; }
-        h1 { font-size: 11pt; font-weight: bold; margin: 0; text-transform: uppercase; border-bottom: 1.5pt solid #000; padding-bottom: 2px; width: 100%; }
-        .contact-info { font-size: 10pt; margin: 5px 0 10px 0; }
-        section { margin-bottom: 8px; }
-        .section-title { font-size: 11pt; font-weight: bold; text-align: center; text-transform: uppercase; margin: 10px 0 4px 0; padding-top: 2px; }
-        .row-bold { display: flex; justify-content: space-between; font-weight: bold; font-size: 10.5pt; }
-        .row-plain { display: flex; justify-content: space-between; font-size: 10pt; margin-top: 1px; }
-        ul { margin: 2px 0; padding-left: 20px; }
-        li { font-size: 10pt; margin-bottom: 1px; }
-        .skills-row { font-size: 10pt; margin-bottom: 1px; }
-    </style>
-</head>
-<body>
-    <header><h1>${name}</h1><div class="contact-info">${contactHtml}</div></header>
-    <main>${sectionsHtml}${listHtml}<section><h2 class="section-title">${skillsTitle}</h2>${skillsInner}</section></main>
-</body></html>`;
-            document.getElementById('outputCode').value = html;
-        }
-
-        function printAsPDF() {
-            const code = document.getElementById('outputCode').value;
-            if (!code) return alert("Generate code first!");
-            const win = window.open('', '_blank');
-            win.document.write(code);
-            win.document.close();
-            win.focus();
-            setTimeout(() => { win.print(); }, 500);
-        }
-
-        function printAsDocx() {
-            const code = document.getElementById('outputCode').value;
-            if (!code) return alert("Generate code first!");
-            const converted = htmlDocx.asBlob(code);
-            saveAs(converted, 'resume.docx');
-        }
-    </script>
+  <!-- Hidden output textarea for download functions -->
+  <textarea id="outputCode" readonly class="hidden-output"></textarea>
 </body>
-
 </html>
