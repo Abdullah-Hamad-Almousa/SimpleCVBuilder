@@ -51,3 +51,5 @@ then open your website on browser recommended (Firefox)
 click ctrl + P
 
 make sure Destination is Microsoft print to pdf and paper size is letter
+
+This version beta 3.0
